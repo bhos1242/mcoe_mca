@@ -1,0 +1,12 @@
+[
+  { "name": "Amit Patil", "company": "Google", "package": "20 LPA" },
+  { "name": "Sneha Deshmukh", "company": "Microsoft", "package": "18 LPA" },
+  { "name": "Rohit Pawar", "company": "Amazon", "package": "22 LPA" },
+  { "name": "Priya Kulkarni", "company": "Facebook", "package": "19 LPA" },
+  { "name": "Vijay Shinde", "company": "Apple", "package": "21 LPA" },
+  { "name": "Anjali Joshi", "company": "Netflix", "package": "23 LPA" },
+  { "name": "Suresh Gaikwad", "company": "Tesla", "package": "24 LPA" },
+  { "name": "Meera Naik", "company": "Adobe", "package": "20 LPA" },
+  { "name": "Kiran Patil", "company": "IBM", "package": "18 LPA" },
+  { "name": "Nikhil Jadhav", "company": "Intel", "package": "22 LPA" }
+]

@@ -1,24 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight, GraduationCap, Lightbulb, Users } from "lucide-react";
 import Link from "next/link";
+import PlacementTicker from "./PlacementTicker";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-r from-blue-600 to-purple-700 text-white py-24 md:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"
-        aria-hidden="true"
-      />
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="relative text-gray-700 py-0 md:py-0 overflow-hidden">
+      <PlacementTicker />
+      <div className="container mx-auto py-24 px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
             Welcome to the{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
+            <span className="text-yellow-500">
               MCA Department
             </span>{" "}
             Modern College Of Engineering, Pune
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-blue-100">
+          <p className="text-xl md:text-2xl mb-8 text-blue-400">
             Fostering Innovation, Research, and Professional Excellence
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -55,10 +53,6 @@ export default function HeroSection() {
           ))}
         </div>
       </div>
-      <div
-        className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"
-        aria-hidden="true"
-      />
     </section>
   );
 }

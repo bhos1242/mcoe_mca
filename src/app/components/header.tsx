@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all shadow-md duration-300 ${
         isSticky ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
@@ -55,7 +55,7 @@ export default function Header() {
                 href={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? "bg-primary/10 text-primary"
+                    ? "bg-primary/10 text-white bg-gradient-to-r from-primary to-purple-600"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
