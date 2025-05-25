@@ -1,38 +1,44 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: "[BUG]"
-labels: ''
-assignees: ''
-
+about: Help us squash bugs and improve the project!
+title: "[BUG] <short description>"
+labels: bug
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## 🐞 Bug Description
 
-**To Reproduce**
-Steps to reproduce the behavior:
+A clear and concise description of what the bug is. What did you expect to happen, and what actually happened?
+
+## 🚦 Steps to Reproduce
+
+Help us see the bug! Please list the steps:
+
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+2. Click on '...'
+3. Scroll down to '...'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## 🤔 Expected vs. Actual Behavior
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+- **Expected:**
+- **Actual:**
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## 🖥️ Environment Details
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+- OS: [e.g. Windows 11, Ubuntu 22.04, macOS Ventura]
+- Browser: [e.g. Chrome, Firefox, Safari]
+- Device: [e.g. Laptop, Mobile]
+- App Version/Branch: [e.g. main, feature/xyz]
 
-**Additional context**
-Add any other context about the problem here.
+## 📸 Screenshots or Logs
+
+If applicable, add screenshots or copy-paste error logs to help explain your problem.
+
+## 💡 Possible Solution (Optional)
+
+Do you have any ideas on how to fix it? Share your thoughts!
+
+## 📚 Additional Context
+
+Add any other context, links, or references that might help us understand the issue.

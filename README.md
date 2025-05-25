@@ -98,11 +98,11 @@ We welcome contributions to improve this project! This project is intended for l
    ```
 9. **Create a Pull Request** from your branch to the main repository.
 
-### Linting and Manual Testing
+### Building and Manual Testing
 
-- Before pushing, run the linter to ensure code quality:
+- Before pushing, check that the project builds successfully:
   ```bash
-  npm run lint
+  npm run build
   ```
 - Manually test your changes in the browser at `http://localhost:3000`.
 - **Note:** There are currently no automated tests. Please ensure your changes do not break existing functionality.
