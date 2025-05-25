@@ -10,6 +10,7 @@ This project is a web application for managing and displaying faculty profiles f
 - [How to Contribute](#how-to-contribute)
 - [Reporting Issues](#reporting-issues)
 - [License](#license)
+- [Framework and Technology Guidelines](#framework-and-technology-guidelines)
 
 ## Installation
 
@@ -120,3 +121,9 @@ When reporting issues, provide as much detail as possible to help us reproduce a
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Framework and Technology Guidelines
+
+- This project is built using **Next.js 15** as the full-stack framework. All development should use Next.js 15 only.
+- You may use **Prisma** for database access if needed.
+- Using other backend frameworks (such as Spring Boot, Express, Django, etc.) is **not supported or permitted** in this project. All backend and frontend logic should be implemented within the Next.js 15 framework.
