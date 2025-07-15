@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { GraduationCap, Menu, X, ChevronDown } from 'lucide-react';
+import { GraduationCap, Menu, X, ChevronDown, LogIn, UserPlus } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,7 +62,7 @@ export default function Header() {
               MCA Department
             </span>
           </Link>
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               item.subItems ? (
                 <DropdownMenu key={item.name}>
@@ -95,6 +95,22 @@ export default function Header() {
                 </Link>
               )
             ))}
+
+            {/* Authentication Links */}
+            <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/login" className="flex items-center space-x-1">
+                  <LogIn className="h-4 w-4" />
+                  <span>Login</span>
+                </Link>
+              </Button>
+              <Button asChild variant="default" size="sm" className="bg-primary hover:bg-primary/90">
+                <Link href="/register" className="flex items-center space-x-1">
+                  <UserPlus className="h-4 w-4" />
+                  <span>Register</span>
+                </Link>
+              </Button>
+            </div>
           </div>
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -150,6 +166,32 @@ export default function Header() {
                     </Link>
                   )
                 ))}
+
+                {/* Mobile Authentication Links */}
+                <div className="border-t border-gray-200 pt-4 mt-6">
+                  <div className="space-y-2">
+                    <Button asChild variant="ghost" className="w-full justify-start">
+                      <Link
+                        href="/login"
+                        className="flex items-center space-x-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <LogIn className="h-4 w-4" />
+                        <span>Faculty Login</span>
+                      </Link>
+                    </Button>
+                    <Button asChild variant="default" className="w-full bg-primary hover:bg-primary/90">
+                      <Link
+                        href="/register"
+                        className="flex items-center space-x-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <UserPlus className="h-4 w-4" />
+                        <span>Register as Faculty</span>
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

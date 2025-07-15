@@ -205,14 +205,16 @@ export default function FacultySection() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <a
-                            href={`mailto:${faculty.email}`}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              window.location.href = `mailto:${faculty.email}`
+                            }}
                             className="flex items-center text-sm text-primary hover:underline"
-                            onClick={(e) => e.stopPropagation()}
                           >
                             <Mail className="w-4 h-4 mr-1" />
                             Email
-                          </a>
+                          </button>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>{faculty.email}</p>
