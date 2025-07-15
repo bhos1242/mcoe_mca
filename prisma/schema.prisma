@@ -1,0 +1,166 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  facultyId String?  @unique
+  faculty   Faculty? @relation(fields: [facultyId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Faculty model based on the existing Faculty interface
+model Faculty {
+  id                String              @id @default(cuid())
+  name              String
+  title             String
+  description       String
+  department        String
+  avatar            String?
+  email             String              @unique
+  phone             String?
+  linkedin          String?
+  twitter           String?
+  expertise         String[]
+  about             String              @db.Text
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  // Relations
+  user              User?
+  qualifications    Qualification[]
+  certifications    Certification[]
+  experiences       Experience[]
+  courses           Course[]
+  researchProjects  ResearchProject[]
+  publications      Publication[]
+  outreachActivities OutreachActivity[]
+  blogPosts         BlogPost[]
+
+  @@map("faculty")
+}
+
+model Qualification {
+  id        String  @id @default(cuid())
+  degree    String
+  school    String
+  year      String
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("qualifications")
+}
+
+model Certification {
+  id        String  @id @default(cuid())
+  name      String
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("certifications")
+}
+
+model Experience {
+  id        String  @id @default(cuid())
+  title     String
+  company   String
+  period    String
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("experiences")
+}
+
+model Course {
+  id         String     @id @default(cuid())
+  courseName String
+  courseId   String
+  facultyId  String
+  faculty    Faculty    @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  materials  Material[]
+
+  @@map("courses")
+}
+
+model Material {
+  id       String  @id @default(cuid())
+  unit     String
+  icon     String
+  courseId String
+  course   Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  topics   Topic[]
+
+  @@map("materials")
+}
+
+model Topic {
+  id         String   @id @default(cuid())
+  title      String
+  link       String
+  materialId String
+  material   Material @relation(fields: [materialId], references: [id], onDelete: Cascade)
+
+  @@map("topics")
+}
+
+model ResearchProject {
+  id          String  @id @default(cuid())
+  title       String
+  description String  @db.Text
+  link        String?
+  facultyId   String
+  faculty     Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("research_projects")
+}
+
+model Publication {
+  id        String  @id @default(cuid())
+  title     String
+  journal   String
+  year      Int
+  link      String?
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("publications")
+}
+
+model OutreachActivity {
+  id           String  @id @default(cuid())
+  title        String
+  description  String  @db.Text
+  image        String?
+  date         String
+  participants Int
+  facultyId    String
+  faculty      Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("outreach_activities")
+}
+
+model BlogPost {
+  id        String  @id @default(cuid())
+  title     String
+  excerpt   String  @db.Text
+  date      String
+  category  String
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+
+  @@map("blog_posts")
+}

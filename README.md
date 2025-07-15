@@ -1,69 +1,217 @@
-# MCA Faculty Profile Management
+# MCA Faculty Management System
 
-This project is a web application for managing and displaying faculty profiles for the MCA department at Modern College of Engineering. It is designed as a **testing and learning project for MCA students at Modern College**. The application includes detailed information about faculty members, their qualifications, experience, courses, research, outreach activities, and blog posts.
+A comprehensive faculty management system for the MCA Department at Modern College of Engineering, Pune. This application provides authentication, profile management, and a public faculty directory with modern web technologies.
 
-## Table of Contents
+## 🚀 Features
+
+### Authentication System
+- ✅ Secure username/password login for faculty members
+- ✅ Next.js 15 authentication with session management
+- ✅ JWT-based authentication with secure cookies
+- ✅ Protected routes with middleware
+
+### Faculty Profile Management
+- ✅ Create and edit faculty profiles
+- ✅ Comprehensive profile information (qualifications, experience, courses, research)
+- ✅ Database-driven with Prisma ORM
+- ✅ Form validation with Zod schemas
+
+### Public Faculty Directory
+- ✅ Browse all faculty profiles
+- ✅ Responsive design with shadcn/ui components
+- ✅ Search and filter capabilities
+- ✅ Individual faculty profile pages
+
+### Technical Features
+- ✅ Next.js 15 with App Router
+- ✅ PostgreSQL database with Prisma ORM
+- ✅ TypeScript for type safety
+- ✅ Tailwind CSS for styling
+- ✅ shadcn/ui component library
+- ✅ Error handling and loading states
+- ✅ Responsive design
+
+## 🛠️ Technology Stack
+
+- **Framework**: Next.js 15
+- **Database**: PostgreSQL (Neon)
+- **ORM**: Prisma
+- **Authentication**: Custom JWT implementation
+- **UI Components**: shadcn/ui
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Validation**: Zod
+- **Forms**: React Hook Form
+
+## 📋 Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Authentication](#authentication)
+- [Faculty Management](#faculty-management)
+- [Database Setup](#database-setup)
 - [Project Structure](#project-structure)
-- [How to Contribute](#how-to-contribute)
-- [Reporting Issues](#reporting-issues)
+- [API Routes](#api-routes)
+- [Contributing](#contributing)
 - [License](#license)
-- [Framework and Technology Guidelines](#framework-and-technology-guidelines)
 
-## Installation
+## 🚀 Installation
 
-To get started with the project, follow these steps:
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- PostgreSQL database (or use the provided Neon database)
 
-1. Clone the repository:
+### Setup Steps
+
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/mcoe_mca.git
-   ```
-2. Navigate to the project directory:
-   ```bash
+   git clone https://github.com/bhos1242/mcoe_mca.git
    cd mcoe_mca
    ```
-3. Install the dependencies:
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-## Usage
+3. **Environment Setup:**
+   The `.env` file is already configured with the database connection. If you need to use a different database, update the `DATABASE_URL`:
+   ```env
+   DATABASE_URL="your_postgresql_connection_string"
+   JWT_SECRET="your_jwt_secret_key"
+   ```
 
-To run the application locally, use the following command:
+4. **Database Setup:**
+   ```bash
+   # Generate Prisma client
+   npm run db:generate
 
-```bash
-npm start
-```
+   # Run database migrations
+   npm run db:migrate
 
-This will start the development server and you can view the application in your browser at `http://localhost:3000`.
+   # Seed the database with existing faculty data
+   npm run migrate-faculty
 
-## Project Structure
+   # Create a test user for login
+   npm run create-test-user
+   ```
 
-The project structure is as follows:
+5. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser and navigate to `http://localhost:3000` (or the port shown in terminal)**
+
+## 🔐 Authentication
+
+### Default Login Credentials
+
+After running the migration scripts, you can use these credentials:
+
+**Existing Faculty Members:**
+- Email: `pradnya.muley@moderncoe.edu.in` | Password: `faculty123`
+- Email: `smita.sontakke@moderncoe.edu.in` | Password: `faculty123`
+
+**Test User (for creating new profiles):**
+- Email: `test@moderncoe.edu.in` | Password: `test123`
+
+### Login Process
+1. Navigate to `/login`
+2. Enter your credentials
+3. Access the faculty dashboard at `/dashboard`
+
+## 👨‍🏫 Faculty Management
+
+### For Faculty Members
+1. **Login** with your credentials
+2. **Create Profile** (if first time) or **Edit Profile**
+3. **Manage** your academic information:
+   - Personal details
+   - Qualifications and certifications
+   - Experience and courses
+   - Research projects and publications
+   - Outreach activities
+
+### For Students/Public
+1. **Browse Faculty Directory** at `/faculty`
+2. **View Individual Profiles** at `/faculty/[faculty-id]`
+3. **Access Course Materials** and research information
+
+## 🗄️ Database Setup
+
+The application uses PostgreSQL with Prisma ORM. The database schema includes:
+
+- **Users**: Authentication and account management
+- **Faculty**: Profile information and academic details
+- **Qualifications**: Educational background
+- **Experience**: Professional experience
+- **Courses**: Teaching assignments with materials
+- **Research**: Projects and publications
+- **Outreach**: Community engagement activities
+
+## 📁 Project Structure
 
 ```
 mcoe_mca/
 ├── src/
 │   ├── app/
+│   │   ├── (auth)/
+│   │   │   └── login/                 # Login page
 │   │   ├── (pages)/
-│   │   │   ├── faculty_profile/
-│   │   │   │   ├── [id]/
-│   │   │   │   │   ├── data/
-│   │   │   │   │   │   └── facultyData.ts
-│   │   │   │   │   ├── FacultyProfile.tsx
-│   │   │   │   │   └── FacultyProfile.module.css
-│   │   ├── components/
-│   │   ├── styles/
-│   │   └── App.tsx
-│   ├── assets/
-│   ├── index.tsx
-│   └── ...
-├── public/
-├── package.json
-├── README.md
+│   │   │   ├── faculty/
+│   │   │   │   ├── [id]/             # Individual faculty profiles
+│   │   │   │   └── page.tsx          # Faculty directory
+│   │   │   └── ...
+│   │   ├── api/
+│   │   │   ├── auth/                 # Authentication endpoints
+│   │   │   └── faculty/              # Faculty CRUD operations
+│   │   ├── dashboard/                # Faculty management dashboard
+│   │   └── components/               # Shared components
+│   ├── components/
+│   │   └── ui/                       # shadcn/ui components
+│   ├── lib/
+│   │   ├── auth.ts                   # Authentication utilities
+│   │   ├── prisma.ts                 # Database client
+│   │   └── utils.ts                  # Utility functions
+│   └── scripts/                      # Database migration scripts
+├── prisma/
+│   ├── schema.prisma                 # Database schema
+│   └── migrations/                   # Database migrations
+├── public/                           # Static assets
 └── ...
+```
+
+## 🔌 API Routes
+
+### Authentication
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+- `GET /api/auth/me` - Get current user data
+
+### Faculty Management
+- `GET /api/faculty` - Get all faculty members
+- `GET /api/faculty/[id]` - Get specific faculty member
+- `POST /api/faculty/create` - Create new faculty profile
+- `PUT /api/faculty/[id]` - Update faculty profile
+
+## 🧪 Available Scripts
+
+```bash
+# Development
+npm run dev              # Start development server
+npm run build           # Build for production
+npm run start           # Start production server
+
+# Database
+npm run db:generate     # Generate Prisma client
+npm run db:migrate      # Run database migrations
+npm run db:studio       # Open Prisma Studio
+
+# Data Management
+npm run migrate-faculty # Migrate existing faculty data
+npm run create-test-user # Create test user account
 ```
 
 ## How to Contribute

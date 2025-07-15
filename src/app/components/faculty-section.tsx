@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
@@ -175,7 +174,10 @@ export default function FacultySection() {
               key={faculty.id}
               className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group"
             >
-              <Link href={`/faculty/${faculty.id}`}>
+              <div
+                onClick={() => window.location.href = `/faculty/${faculty.id}`}
+                className="cursor-pointer"
+              >
                 <CardHeader className="pb-2">
                   <Avatar className="w-24 h-24 mx-auto mb-4 ring-2 ring-primary ring-offset-2 group-hover:ring-4 transition-all duration-300">
                     <AvatarImage src={`/faculty/${faculty.id}.jpg`} alt={faculty.name} />
@@ -201,39 +203,41 @@ export default function FacultySection() {
                     <Clock className="w-4 h-4 mr-1 text-muted-foreground" />
                     <span className="text-sm">{faculty.experience}</span>
                   </div>
-                  <div className="flex flex-col items-center space-y-2 mt-4">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <a
-                            href={`mailto:${faculty.email}`}
-                            className="flex items-center text-sm text-primary hover:underline"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <Mail className="w-4 h-4 mr-1" />
-                            Email
-                          </a>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{faculty.email}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    {faculty.personal_website && (
-                      <a
-                        href={faculty.personal_website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center text-sm text-primary hover:underline"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Globe className="w-4 h-4 mr-1" />
-                        Personal Website
-                      </a>
-                    )}
-                  </div>
                 </CardContent>
-              </Link>
+              </div>
+              <div className="px-6 pb-4">
+                <div className="flex flex-col items-center space-y-2 mt-4">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a
+                          href={`mailto:${faculty.email}`}
+                          className="flex items-center text-sm text-primary hover:underline"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Mail className="w-4 h-4 mr-1" />
+                          Email
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{faculty.email}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  {faculty.personal_website && (
+                    <a
+                      href={faculty.personal_website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-primary hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Globe className="w-4 h-4 mr-1" />
+                      Personal Website
+                    </a>
+                  )}
+                </div>
+              </div>
             </Card>
           ))}
         </div>
