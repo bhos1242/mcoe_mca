@@ -71,7 +71,7 @@ export default function Footer() {
                 { href: "#", icon: Linkedin, label: "LinkedIn" },
                 { href: "#", icon: Instagram, label: "Instagram" },
               ].map((social, index) => (
-                <Button key={index} variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
+                <Button key={index} variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground" asChild>
                   <a
                     href={social.href}
                     target="_blank"

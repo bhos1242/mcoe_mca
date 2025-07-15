@@ -14,7 +14,31 @@ interface StudyMaterialProps {
 }
 
 export default function StudyMaterial({ faculty }: StudyMaterialProps) {
-  const [activeTab, setActiveTab] = useState(faculty.courses[0].materials[0].unit)
+  // Check if faculty has courses and materials before accessing them
+  const hasValidCourseData = faculty.courses && 
+                             faculty.courses.length > 0 && 
+                             faculty.courses[0].materials && 
+                             faculty.courses[0].materials.length > 0;
+  
+  const [activeTab, setActiveTab] = useState(
+    hasValidCourseData ? faculty.courses[0].materials[0].unit : ''
+  );
+
+  // If no valid course data, show a message
+  if (!hasValidCourseData) {
+    return (
+      <div className="space-y-8">
+        <div className="text-center py-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            Study Materials
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400">
+            No study materials are currently available for this faculty member.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -46,7 +70,7 @@ export default function StudyMaterial({ faculty }: StudyMaterialProps) {
                 </div>
 
                 <div className="space-y-4">
-                  {course.materials.map((material, materialIndex) => (
+                  {course.materials && course.materials.length > 0 ? course.materials.map((material, materialIndex) => (
                     <div key={materialIndex} className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <FileText className="h-5 w-5 text-gray-500" />
@@ -56,7 +80,7 @@ export default function StudyMaterial({ faculty }: StudyMaterialProps) {
                       </div>
 
                       <div className="pl-7 space-y-2">
-                        {material.topics.map((topic, topicIndex) => (
+                        {material.topics && material.topics.length > 0 ? material.topics.map((topic, topicIndex) => (
                           <a
                             key={topicIndex}
                             href={topic.link}
@@ -67,10 +91,14 @@ export default function StudyMaterial({ faculty }: StudyMaterialProps) {
                             <ExternalLink className="h-4 w-4" />
                             <span>{topic.title}</span>
                           </a>
-                        ))}
+                        )) : (
+                          <p className="text-gray-500 dark:text-gray-400 text-sm">No topics available</p>
+                        )}
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <p className="text-gray-500 dark:text-gray-400">No materials available for this course</p>
+                  )}
                 </div>
               </div>
             </Card>

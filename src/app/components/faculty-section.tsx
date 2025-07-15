@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
@@ -175,7 +174,10 @@ export default function FacultySection() {
               key={faculty.id}
               className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group"
             >
-              <Link href={`/faculty/${faculty.id}`}>
+              <div
+                onClick={() => window.location.href = `/faculty/${faculty.id}`}
+                className="cursor-pointer"
+              >
                 <CardHeader className="pb-2">
                   <Avatar className="w-24 h-24 mx-auto mb-4 ring-2 ring-primary ring-offset-2 group-hover:ring-4 transition-all duration-300">
                     <AvatarImage src={`/faculty/${faculty.id}.jpg`} alt={faculty.name} />
@@ -205,16 +207,14 @@ export default function FacultySection() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              window.location.href = `mailto:${faculty.email}`
-                            }}
+                          <a
+                            href={`mailto:${faculty.email}`}
                             className="flex items-center text-sm text-primary hover:underline"
+                            onClick={(e) => e.stopPropagation()}
                           >
                             <Mail className="w-4 h-4 mr-1" />
                             Email
-                          </button>
+                          </a>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>{faculty.email}</p>

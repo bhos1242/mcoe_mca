@@ -90,7 +90,7 @@ export default function FacultyProfile({ faculty }: FacultyProfileProps) {
         <Card className="p-6">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">Areas of Expertise</h2>
           <div className="flex flex-wrap gap-2">
-            {faculty.expertise.map((skill, index) => (
+            {faculty.expertise && faculty.expertise.length > 0 ? faculty.expertise.map((skill, index) => (
               <Badge
                 key={index}
                 variant="secondary"
@@ -98,7 +98,9 @@ export default function FacultyProfile({ faculty }: FacultyProfileProps) {
               >
                 {skill}
               </Badge>
-            ))}
+            )) : (
+              <p className="text-gray-500 dark:text-gray-400">No expertise areas listed</p>
+            )}
           </div>
         </Card>
       </motion.div>
@@ -112,7 +114,7 @@ export default function FacultyProfile({ faculty }: FacultyProfileProps) {
         <Card className="p-6">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">Qualifications</h2>
           <div className="space-y-4">
-            {faculty.qualifications.map((qual, index) => (
+            {faculty.qualifications && faculty.qualifications.length > 0 ? faculty.qualifications.map((qual, index) => (
               <div key={index} className="flex items-start space-x-4">
                 <div className="h-2 w-2 mt-2 rounded-full bg-blue-500" />
                 <div>
@@ -123,7 +125,9 @@ export default function FacultyProfile({ faculty }: FacultyProfileProps) {
                   )}
                 </div>
               </div>
-            ))}
+            )) : (
+              <p className="text-gray-500 dark:text-gray-400">No qualifications listed</p>
+            )}
           </div>
         </Card>
       </motion.div>
