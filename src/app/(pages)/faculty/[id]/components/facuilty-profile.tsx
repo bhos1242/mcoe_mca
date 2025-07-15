@@ -141,14 +141,16 @@ export default function FacultyProfile({ faculty }: FacultyProfileProps) {
         <Card className="p-6">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">Experience</h2>
           <div className="space-y-6">
-            {faculty.experience.map((exp, index) => (
+            {faculty.experience && faculty.experience.length > 0 ? faculty.experience.map((exp, index) => (
               <div key={index} className="relative pl-8 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-gray-200 dark:before:bg-gray-700">
                 <div className="absolute left-0 top-0 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-blue-500 bg-white dark:bg-gray-800" />
                 <h3 className="font-semibold text-gray-900 dark:text-white">{exp.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{exp.company}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">{exp.period}</p>
               </div>
-            ))}
+            )) : (
+              <p className="text-gray-500 dark:text-gray-400">No experience listed</p>
+            )}
           </div>
         </Card>
       </motion.div>

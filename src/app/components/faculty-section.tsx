@@ -203,41 +203,39 @@ export default function FacultySection() {
                     <Clock className="w-4 h-4 mr-1 text-muted-foreground" />
                     <span className="text-sm">{faculty.experience}</span>
                   </div>
+                  <div className="flex flex-col items-center space-y-2 mt-4">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <a
+                            href={`mailto:${faculty.email}`}
+                            className="flex items-center text-sm text-primary hover:underline"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Mail className="w-4 h-4 mr-1" />
+                            Email
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{faculty.email}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    {faculty.personal_website && (
+                      <a
+                        href={faculty.personal_website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-sm text-primary hover:underline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Globe className="w-4 h-4 mr-1" />
+                        Personal Website
+                      </a>
+                    )}
+                  </div>
                 </CardContent>
-              </div>
-              <div className="px-6 pb-4">
-                <div className="flex flex-col items-center space-y-2 mt-4">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <a
-                          href={`mailto:${faculty.email}`}
-                          className="flex items-center text-sm text-primary hover:underline"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Mail className="w-4 h-4 mr-1" />
-                          Email
-                        </a>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{faculty.email}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                  {faculty.personal_website && (
-                    <a
-                      href={faculty.personal_website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-sm text-primary hover:underline"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Globe className="w-4 h-4 mr-1" />
-                      Personal Website
-                    </a>
-                  )}
-                </div>
-              </div>
+              </Link>
             </Card>
           ))}
         </div>

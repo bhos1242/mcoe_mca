@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { GraduationCap, Menu, X, ChevronDown, LogIn, User, UserPlus } from 'lucide-react';
+import { GraduationCap, Menu, X, ChevronDown } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,72 +51,40 @@ export default function Header() {
               MCA Department
             </span>
           </Link>
-
-          <div className="flex items-center space-x-4">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item) => (
-                item.subItems ? (
-                  <DropdownMenu key={item.name}>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="mca-nav-link">
-                        {item.name} <ChevronDown className="h-4 w-4 ml-1" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="mca-card">
-                      {item.subItems.map((subItem) => (
-                        <DropdownMenuItem key={subItem.name}>
-                          <Link href={subItem.href} className="w-full mca-nav-link">
-                            {subItem.name}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      isActive(item.href)
-                        ? "mca-nav-link-active bg-primary/10"
-                        : "mca-nav-link hover:bg-muted"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
-              ))}
-            </div>
-
-            {/* Login/Dashboard Button */}
-            <div className="hidden md:flex items-center space-x-2">
-              {isAuthPage ? (
-                <Link href="/">
-                  <Button variant="outline" size="sm" className="mca-button-outline">
-                    <GraduationCap className="h-4 w-4 mr-2" />
-                    Public Site
-                  </Button>
-                </Link>
+          <div className="hidden md:flex space-x-1">
+            {navItems.map((item) => (
+              item.subItems ? (
+                <DropdownMenu key={item.name}>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center space-x-1">
+                      {item.name} <ChevronDown className="h-4 w-4 ml-1" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {item.subItems.map((subItem) => (
+                      <DropdownMenuItem key={subItem.name}>
+                        <Link href={subItem.href} className="w-full">
+                          {subItem.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
-                <>
-                  <Link href="/register">
-                    <Button variant="outline" size="sm" className="mca-button-outline">
-                      <UserPlus className="h-4 w-4 mr-2" />
-                      Register
-                    </Button>
-                  </Link>
-                  <Link href="/login">
-                    <Button size="sm" className="mca-button-primary">
-                      <LogIn className="h-4 w-4 mr-2" />
-                      Login
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div>
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive(item.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            ))}
           </div>
-          {/* Mobile Menu */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button
@@ -168,33 +136,6 @@ export default function Header() {
                     </Link>
                   )
                 ))}
-
-                {/* Mobile Login/Dashboard Button */}
-                <div className="pt-4 border-t border-border space-y-3">
-                  {isAuthPage ? (
-                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button variant="outline" className="w-full mca-button-outline">
-                        <GraduationCap className="h-4 w-4 mr-2" />
-                        Public Site
-                      </Button>
-                    </Link>
-                  ) : (
-                    <>
-                      <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="outline" className="w-full mca-button-outline">
-                          <UserPlus className="h-4 w-4 mr-2" />
-                          Register as Faculty
-                        </Button>
-                      </Link>
-                      <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button className="w-full mca-button-primary">
-                          <LogIn className="h-4 w-4 mr-2" />
-                          Faculty Login
-                        </Button>
-                      </Link>
-                    </>
-                  )}
-                </div>
               </div>
             </SheetContent>
           </Sheet>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Toaster } from 'react-hot-toast';
 import Footer from "./components/footer";
 import Header from "./components/header";
 import "./globals.css";
@@ -34,6 +35,16 @@ export default function RootLayout({
         <Header />
         <div className="min-h-screen">{children}</div>
         <Footer />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+          }}
+        />
       </body>
     </html>
   );
